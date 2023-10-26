@@ -1,6 +1,7 @@
-import { CHANGE_AUTH } from "./authStat";
+import { CHANGE_AUTH, CHANGE_TITLE } from "./authStat";
 const initialState = {
-    isOpen: false
+    isOpen: false,
+    title: ""
 }
 const reducer = (state = initialState, action) => {
     switch (action.type){
@@ -9,6 +10,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isOpen: action.payload
             }
+
+        case CHANGE_TITLE:
+            return {
+                ...state,
+                title: action.payload
+            }
+
         default:
             return state;
     }

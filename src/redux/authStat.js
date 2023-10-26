@@ -1,1 +1,2 @@
 export const CHANGE_AUTH = "CHANGE_AUTH"
+export const CHANGE_TITLE = "CHANGE_TITLE"

@@ -3,20 +3,21 @@ import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleAuthChange } from '../../redux/auth';
+import AuthBody from './AuthBody';
+import AuthFooter from './AuthFooter';
+
 
 function Modal ({
 
   onSubmit,
-  title,
-  body,
   actionLabel,
-  footer,
   disabled,
   secondaryAction,
   secondaryActionLabel,
 }) {
-  const {isOpen} = useSelector(state => state)
+  const {isOpen, title} = useSelector(state => state)
   const [showModal, setShowModal] = useState(isOpen);
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -141,7 +142,7 @@ function Modal ({
               </div>
               {/*body*/}
               <div className="relative p-6 flex-auto">
-                {body}
+              <AuthBody/>
               </div>
               {/*footer*/}
               <div className="flex flex-col gap-2 p-6">
@@ -168,7 +169,9 @@ function Modal ({
                     onClick={handleSubmit}
                   />
                 </div>
-                {footer}
+
+                <AuthFooter/>
+         
               </div>
             </div>
           </div>

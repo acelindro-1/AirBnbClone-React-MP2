@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react'
 import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
-import LoginModal from '../modals/LoginModal';
+
 
 import { useDispatch, useSelector } from 'react-redux'
-import { handleAuthChange } from '../../redux/auth';
+import { handleAuthChange, handleTitleChange } from '../../redux/auth';
 
 
 function UserMenu() {
@@ -44,8 +44,8 @@ function UserMenu() {
           <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
             <div className="flex flex-col cursor-pointer">
               <>
-                <MenuItem onClick=  { () => {dispatch(handleAuthChange(!isOpen))} } label="Login" />
-                <MenuItem onClick={() => {}} label="Sign Up" />
+                <MenuItem onClick=  { () => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))} } label="Login" />
+                <MenuItem onClick={() => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Register"))}} label="Sign Up" />
               </>
             </div>
           </div>
