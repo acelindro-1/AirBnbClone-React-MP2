@@ -3,8 +3,8 @@ import React from 'react';
 const Button = ({ label, onClick, disabled, outline, small, icon: Icon }) => {
   return (
     <button
-      disabled={disabled}
-      onClick={onClick}
+      // disabled={disabled}
+      // onClick={onClick}
       className={`
         relative
         disabled:opacity-70
