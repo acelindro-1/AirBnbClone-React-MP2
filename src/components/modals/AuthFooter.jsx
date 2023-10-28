@@ -1,13 +1,31 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button';
+import { handleAuthChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
 
-function AuthFooter() {
+function AuthFooter({}) {
 
-    const {title} = useSelector(state => state)
+    const {title, regHome} = useSelector(state => state)
+    const dispatch = useDispatch()
+
     if(title=='Register'){
         return (
-            <div className="flex flex-col gap-4 mt-3">
+          <div className="flex flex-col gap-2 p-6">
+            <div 
+                  className="
+                    flex 
+                    flex-row 
+                    items-center 
+                    gap-4 
+                    w-full
+                  "
+                >
+                  <Button 
+                    label={"Continue"} 
+                    // onClick={}
+                  />
+                </div>
+      <div className="flex flex-col gap-4 mt-3">
             <hr />
             <Button 
               outline 
@@ -41,11 +59,32 @@ function AuthFooter() {
               </p>
             </div>
           </div>
+
+          </div>
+      
           )
     }
     else if(title=='Login'){
         return(
-            <div className="flex flex-col gap-4 mt-3">
+
+          <div className="flex flex-col gap-2 p-6">
+          <div 
+            className="
+              flex 
+              flex-row 
+              items-center 
+              gap-4 
+              w-full
+            "
+          >
+
+            <Button 
+              label={"Continue"} 
+              // onClick={}
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 mt-3">
             <hr />
             <Button 
               outline 
@@ -73,8 +112,184 @@ function AuthFooter() {
               </p>
             </div>
           </div>
+   
+        </div>
+
+        
         )
     }
+    else if (title=="Airbnb your home!") {
+      if(regHome=="category"){
+        return(
+          <div  className="flex flex-col gap-2 p-6">
+          <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+          
+          <Button 
+            // disabled={disabled} 
+          
+            onClick={() => {dispatch(handleRegHomeChange('location'))}}
+            label="Next"
+          />
+        </div>
+          </div>
+        
+        )
+      }
+      else if (regHome=='location'){
+        return(
+          <div className="flex flex-col gap-2 p-6">
+          <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+        <Button 
+              // disabled={disabled} 
+              label={"Back"} 
+              onClick={() => {dispatch(handleRegHomeChange("category"))}}
+              outline
+            />  
+    
+          <Button 
+            // disabled={disabled} 
+            label={"Next"} 
+            onClick={() => {dispatch(handleRegHomeChange("info"))}}
+          />
+        </div>
+          </div>
+
+        )
+      }
+      else if (regHome=='info'){
+        return(
+          <div className="flex flex-col gap-2 p-6">
+          <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+        <Button 
+              // disabled={disabled} 
+              label={"Back"} 
+              onClick={() => {dispatch(handleRegHomeChange("location"))}}
+              outline
+            />  
+    
+          <Button 
+            // disabled={disabled} 
+            label={"Next"} 
+            onClick={() => {dispatch(handleRegHomeChange("images"))}}
+          />
+        </div>
+          </div>
+
+        )
+      }
+      else if (regHome=='images'){
+        return(
+          <div className="flex flex-col gap-2 p-6">
+          <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+        <Button 
+              // disabled={disabled} 
+              label={"Back"} 
+              onClick={() => {dispatch(handleRegHomeChange("info"))}}
+              outline
+            />  
+    
+          <Button 
+            // disabled={disabled} 
+            label={"Next"} 
+            onClick={() => {dispatch(handleRegHomeChange("description"))}}
+          />
+        </div>
+          </div>
+
+        )
+      }
+      else if (regHome=='description'){
+        return(
+          <div className="flex flex-col gap-2 p-6">
+          <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+        <Button 
+              // disabled={disabled} 
+              label={"Back"} 
+              onClick={() => {dispatch(handleRegHomeChange("images"))}}
+              outline
+            />  
+    
+          <Button 
+            // disabled={disabled} 
+            label={"Next"} 
+            onClick={() => {dispatch(handleRegHomeChange("price"))}}
+          />
+        </div>
+          </div>
+
+        )
+      }
+      else if (regHome=='price'){
+        return(
+          <div className="flex flex-col gap-2 p-6">
+        <div 
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            w-full
+          "
+        >
+        <Button 
+              // disabled={disabled} 
+              label={"Back"} 
+              onClick={() => {dispatch(handleRegHomeChange("description"))}}
+              outline
+            />  
+    
+          <Button 
+            // disabled={disabled} 
+            label={"Create"} 
+            // onClick={handleSubmit}
+          />
+        </div>
+          </div>
+  
+        )
+      }
+   
+    }   
 }
 
 export default AuthFooter

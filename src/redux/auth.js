@@ -1,4 +1,4 @@
-import { CHANGE_AUTH, CHANGE_TITLE } from "./authStat";
+import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME } from "./authStat";
 
 export const handleAuthChange = (payload) => ({
     type: CHANGE_AUTH,
@@ -7,5 +7,10 @@ export const handleAuthChange = (payload) => ({
 
 export const handleTitleChange = (payload) => ({
     type: CHANGE_TITLE,
+    payload,
+})
+
+export const handleRegHomeChange = (payload) => ({
+    type: CHANGE_REG_HOME,
     payload,
 })
