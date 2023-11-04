@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button';
-import { handleAuthChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
+import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleListChange, handlePriceChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
 
 function AuthFooter({}) {
 
-    const {title, regHome} = useSelector(state => state)
+    const {isOpen, title, regHome, category, img, price, list} = useSelector(state => state)
     const dispatch = useDispatch()
+
+    function addList() {
+      
+      const newList = {
+        id: Math.random() * 100,
+        cat: category,
+        loc: "Philippines",
+        img: img,
+        listPrice: price
+    }
+    dispatch(handleListChange([...list, newList]))
+    dispatch(handleAuthChange(!isOpen))
+    dispatch(handleTitleChange(""))
+    dispatch(handleRegHomeChange("category"))
+    dispatch(handleCatChange("Beach"))
+    dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+    dispatch(handlePriceChange("Php 0.00"))
+    dispatch(handleFilterChange(""))
+    }
 
     if(title=='Register'){
         return (
@@ -131,12 +150,20 @@ function AuthFooter({}) {
             w-full
           "
         >
+              <Button 
+            // disabled={disabled} 
           
+            onClick={() => {dispatch(handleAuthChange(!isOpen))}}
+            label="Close"
+            outline
+          />
+
           <Button 
             // disabled={disabled} 
           
             onClick={() => {dispatch(handleRegHomeChange('location'))}}
             label="Next"
+            
           />
         </div>
           </div>
@@ -165,14 +192,43 @@ function AuthFooter({}) {
           <Button 
             // disabled={disabled} 
             label={"Next"} 
-            onClick={() => {dispatch(handleRegHomeChange("info"))}}
+            onClick={() => {dispatch(handleRegHomeChange("images"))}}
           />
         </div>
           </div>
 
         )
       }
-      else if (regHome=='info'){
+      // else if (regHome=='info'){
+      //   return(
+      //     <div className="flex flex-col gap-2 p-6">
+      //     <div 
+      //     className="
+      //       flex 
+      //       flex-row 
+      //       items-center 
+      //       gap-4 
+      //       w-full
+      //     "
+      //   >
+      //   <Button 
+      //         // disabled={disabled} 
+      //         label={"Back"} 
+      //         onClick={() => {dispatch(handleRegHomeChange("location"))}}
+      //         outline
+      //       />  
+    
+      //     <Button 
+      //       // disabled={disabled} 
+      //       label={"Next"} 
+      //       onClick={() => {dispatch(handleRegHomeChange("images"))}}
+      //     />
+      //   </div>
+      //     </div>
+
+      //   )
+      // }
+      else if (regHome=='images'){
         return(
           <div className="flex flex-col gap-2 p-6">
           <div 
@@ -194,46 +250,46 @@ function AuthFooter({}) {
           <Button 
             // disabled={disabled} 
             label={"Next"} 
-            onClick={() => {dispatch(handleRegHomeChange("images"))}}
+            onClick={() => {dispatch(handleRegHomeChange("price"))}}
           />
         </div>
           </div>
 
         )
       }
-      else if (regHome=='images'){
-        return(
-          <div className="flex flex-col gap-2 p-6">
-          <div 
-          className="
-            flex 
-            flex-row 
-            items-center 
-            gap-4 
-            w-full
-          "
-        >
-        <Button 
-              // disabled={disabled} 
-              label={"Back"} 
-              onClick={() => {dispatch(handleRegHomeChange("info"))}}
-              outline
-            />  
+      // else if (regHome=='description'){
+      //   return(
+      //     <div className="flex flex-col gap-2 p-6">
+      //     <div 
+      //     className="
+      //       flex 
+      //       flex-row 
+      //       items-center 
+      //       gap-4 
+      //       w-full
+      //     "
+      //   >
+      //   <Button 
+      //         // disabled={disabled} 
+      //         label={"Back"} 
+      //         onClick={() => {dispatch(handleRegHomeChange("images"))}}
+      //         outline
+      //       />  
     
-          <Button 
-            // disabled={disabled} 
-            label={"Next"} 
-            onClick={() => {dispatch(handleRegHomeChange("description"))}}
-          />
-        </div>
-          </div>
+      //     <Button 
+      //       // disabled={disabled} 
+      //       label={"Next"} 
+      //       onClick={() => {dispatch(handleRegHomeChange("price"))}}
+      //     />
+      //   </div>
+      //     </div>
 
-        )
-      }
-      else if (regHome=='description'){
+      //   )
+      // }
+      else if (regHome=='price'){
         return(
           <div className="flex flex-col gap-2 p-6">
-          <div 
+        <div 
           className="
             flex 
             flex-row 
@@ -251,37 +307,9 @@ function AuthFooter({}) {
     
           <Button 
             // disabled={disabled} 
-            label={"Next"} 
-            onClick={() => {dispatch(handleRegHomeChange("price"))}}
-          />
-        </div>
-          </div>
-
-        )
-      }
-      else if (regHome=='price'){
-        return(
-          <div className="flex flex-col gap-2 p-6">
-        <div 
-          className="
-            flex 
-            flex-row 
-            items-center 
-            gap-4 
-            w-full
-          "
-        >
-        <Button 
-              // disabled={disabled} 
-              label={"Back"} 
-              onClick={() => {dispatch(handleRegHomeChange("description"))}}
-              outline
-            />  
-    
-          <Button 
-            // disabled={disabled} 
             label={"Create"} 
-            // onClick={handleSubmit}
+            onClick={() => {addList()}}
+            
           />
         </div>
           </div>

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleAuthChange } from '../../redux/auth';
+import { handleAuthChange, handleCatChange, handleImgChange, handlePriceChange, handleRegHomeChange, handleTitleChange } from '../../redux/auth';
 import AuthBody from './AuthBody';
 import AuthFooter from './AuthFooter';
 
@@ -25,17 +25,17 @@ function Modal ({
   }, [isOpen]);
 
 
-  function close(){
+  // function close(){
 
-         setShowModal(false);
+  //   setShowModal(false);
 
-    setTimeout(() => {
+  //   setTimeout(() => {
 
-      dispatch(handleAuthChange(!isOpen))
+  //     dispatch(handleAuthChange(!isOpen))
 
-    }, 300);
+  //   }, 300);
  
-  }
+  // }
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -54,7 +54,10 @@ function Modal ({
   }, [secondaryAction, disabled]);
 
   if (!isOpen) {
+
+  
     return null;
+   
   }
 
   return (
@@ -132,7 +135,13 @@ function Modal ({
                     absolute
                     left-9
                   "
-                  onClick={close}
+                  onClick={()=>{dispatch(handleAuthChange(!isOpen)), 
+                    dispatch(handleTitleChange(""))
+                    dispatch(handleRegHomeChange("category"))
+                    dispatch(handleCatChange("Beach"))
+                    dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+                    dispatch(handlePriceChange("Php 0.00"))
+                  }}
                 >
                   <IoMdClose size={18} />
                 </button>
@@ -150,8 +159,6 @@ function Modal ({
               <AuthFooter/>
               </div>
               
-
-
             </div>
           </div>
         </div>

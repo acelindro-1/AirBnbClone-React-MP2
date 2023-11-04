@@ -33,6 +33,7 @@ function Navbar() {
                 </Container>
             </div>
             <Categories />
+         
         </div>
      );
 }

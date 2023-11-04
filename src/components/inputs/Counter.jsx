@@ -1,4 +1,5 @@
 import React from 'react'
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
 function Counter({title, subtitle, value}) {
     return ( 
@@ -27,7 +28,7 @@ function Counter({title, subtitle, value}) {
                 transition
               "
             >
-              {/* <AiOutlineMinus /> */}
+              <AiOutlineMinus />
             </div>
             <div 
               className="
@@ -55,7 +56,7 @@ function Counter({title, subtitle, value}) {
                 transition
               "
             >
-              {/* <AiOutlinePlus /> */}
+              <AiOutlinePlus />
             </div>
           </div>
         </div>

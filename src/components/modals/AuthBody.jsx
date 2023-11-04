@@ -1,15 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
 import CategoryInput from '../inputs/CategoryInput';
 import { categories } from '../navbar/Categories';
 import Map from '../Map';
 import Counter from '../inputs/Counter';
+import { handleListChange } from '../../redux/auth';
+import InputPrice from '../inputs/InputPrice';
+import Images from '../Images';
 
 function AuthBody({}) {
 
     const {title, regHome} = useSelector(state => state)
+
 
     if(title=="Register"){
         return (
@@ -157,36 +161,36 @@ Plceholder="Email"
         )
      
       }
-      else if(regHome=="info"){
-        return(
-          <div className="flex flex-col gap-8">
-          <Heading
-            Title="Share some basics about your place"
-            subtitle="What amenitis do you have?"
-          />
-          <Counter 
-            // onChange={(value) => setCustomValue('guestCount', value)}
-            // value={guestCount}
-            title="Guests" 
-            subtitle="How many guests do you allow?"
-          />
-          <hr />
-          <Counter 
-            // onChange={(value) => setCustomValue('roomCount', value)}
-            // value={roomCount}
-            title="Rooms" 
-            subtitle="How many rooms do you have?"
-          />
-          <hr />
-          <Counter 
-            // onChange={(value) => setCustomValue('bathroomCount', value)}
-            // value={bathroomCount}
-            title="Bathrooms" 
-            subtitle="How many bathrooms do you have?"
-          />
-        </div>
-        )
-      }
+      // else if(regHome=="info"){
+      //   return(
+      //     <div className="flex flex-col gap-8">
+      //     <Heading
+      //       Title="Share some basics about your place"
+      //       subtitle="What amenitis do you have?"
+      //     />
+      //     <Counter 
+      //       // onChange={(value) => setCustomValue('guestCount', value)}
+      //       // value={guestCount}
+      //       title="Guests" 
+      //       subtitle="How many guests do you allow?"
+      //     />
+      //     <hr />
+      //     <Counter 
+      //       // onChange={(value) => setCustomValue('roomCount', value)}
+      //       // value={roomCount}
+      //       title="Rooms" 
+      //       subtitle="How many rooms do you have?"
+      //     />
+      //     <hr />
+      //     <Counter 
+      //       // onChange={(value) => setCustomValue('bathroomCount', value)}
+      //       // value={bathroomCount}
+      //       title="Bathrooms" 
+      //       subtitle="How many bathrooms do you have?"
+      //     />
+      //   </div>
+      //   )
+      // }
       else if(regHome=="images"){
         return(
           <div className="flex flex-col gap-8">
@@ -194,42 +198,39 @@ Plceholder="Email"
             Title="Add a photo of your place"
             subtitle="Show guests what your place looks like!"
           />
-          {/* <ImageUpload
-            onChange={(value) => setCustomValue('imageSrc', value)}
-            value={imageSrc}
-          /> */}
+         <Images/>
         </div>
         )
 
       }
-      else if(regHome=="description"){
-        return(
-          <div className="flex flex-col gap-8">
-          <Heading
-            Title="How would you describe your place?"
-            subtitle="Short and sweet works best!"
-          />
-          <Input
-            id="title"
-            label="Title"
-            // disabled={isLoading}
-            // register={register}
-            // errors={errors}
-            // required
-          />
-          <hr />
-          <Input
-            id="description"
-            label="Description"
-            // disabled={isLoading}
-            // register={register}
-            // errors={errors}
-            // required
-          />
-        </div>
-        )
+      // else if(regHome=="description"){
+      //   return(
+      //     <div className="flex flex-col gap-8">
+      //     <Heading
+      //       Title="How would you describe your place?"
+      //       subtitle="Short and sweet works best!"
+      //     />
+      //     <Input
+      //       id="title"
+      //       label="Title"
+      //       // disabled={isLoading}
+      //       // register={register}
+      //       // errors={errors}
+      //       // required
+      //     />
+      //     <hr />
+      //     <Input
+      //       id="description"
+      //       label="Description"
+      //       // disabled={isLoading}
+      //       // register={register}
+      //       // errors={errors}
+      //       // required
+      //     />
+      //   </div>
+      //   )
 
-      }
+      // }
       else if(regHome=="price"){
         return(
           <div className="flex flex-col gap-8">
@@ -237,11 +238,13 @@ Plceholder="Email"
             Title="Now, set your price"
             subtitle="How much do you charge per night?"
           />
-          <Input
+          <InputPrice
             id="price"
             label="Price"
             formatPrice 
             type="number" 
+            Plceholder = "Enter Price"
+            
             // disabled={isLoading}
             // register={register}
             // errors={errors}

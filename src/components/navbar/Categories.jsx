@@ -5,12 +5,14 @@ import CategoryBox from '../CategoryBox'
 export const categories = [
     {
       label: 'Beach',
+      category: 'beach',
     //   icon: TbBeach,
       description: 'This property is close to the beach!',
     },
     {
       label: 'Windmills',
     //   icon: GiWindmill,
+    category: 'windmill',
       description: 'This property is has windmills!',
     },
     {
