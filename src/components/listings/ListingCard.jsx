@@ -52,6 +52,7 @@ function ListingCard({
               </div>
             </div>
             <div className="font-semibold text-lg">
+              {lLoc}
               {/* {location?.region}, {location?.label} */}
             </div>
             <div className="font-light text-neutral-500">

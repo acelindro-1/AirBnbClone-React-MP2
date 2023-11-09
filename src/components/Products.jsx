@@ -6,12 +6,9 @@ import ListingCard from './listings/ListingCard'
 
 function Products() {
   const {list, filter} = useSelector(state => state)
+  const lest = JSON.parse(localStorage.getItem('products')) || [];
 
-  function filterCat(fcat) {
-    list.filter((item) => item.cat === filter)
-}
-
-const filtered = list.filter(item => item.cat == filter);
+const filtered = lest.filter(item => item.cat == filter);
 
   // return (
   //   <Container>
@@ -64,10 +61,10 @@ const filtered = list.filter(item => item.cat == filter);
         gap-8
       "
       >
-        {list.map((item) => 
+        {lest.map((item) => 
         (
           <ListingCard 
-            // key={item.label}
+            key={item.id}
             // label={item.label}
           //   icon={item.icon}
           //   selected={category === item.label}
@@ -105,7 +102,7 @@ const filtered = list.filter(item => item.cat == filter);
 {filtered.map((item) => 
         (
           <ListingCard 
-            // key={item.label}
+            key={item.id}
             // label={item.label}
           //   icon={item.icon}
           //   selected={category === item.label}

@@ -1,8 +1,10 @@
 import React from 'react'
 import Navbar from './components/navbar/Navbar'
 import Modal from './components/modals/Modal'
-import {useSelector } from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import Products from './components/Products';
+import './index.css';
+import { handleLoggedChange } from './redux/auth';
 
 
 function App() {

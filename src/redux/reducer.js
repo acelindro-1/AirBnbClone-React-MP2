@@ -1,4 +1,4 @@
-import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT,  CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER } from "./authStat";
+import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT,  CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER, CHANGE_EMAIL, CHANGE_NAME, CHANGE_PW, CHANGE_LOGGED, CHANGE_ERROR } from "./authStat";
 const initialState = {
     isOpen: false,
     title: "",
@@ -7,7 +7,12 @@ const initialState = {
     img: "../../src/assets/images/arctic.jpg",
     price: "Php 0.00",
     list: [],
-    filter:""
+    filter:"",
+    email:"",
+    name:"",
+    pw:"",
+    logged:"",
+    error:""
 }
 const reducer = (state = initialState, action) => {
     switch (action.type){
@@ -58,6 +63,35 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 filter: action.payload
             }       
+
+        case CHANGE_EMAIL:
+            return {
+                ...state,
+                email: action.payload
+            }    
+            
+        case CHANGE_NAME:
+            return {
+                ...state,
+                name: action.payload
+            }    
+
+        case CHANGE_PW:
+            return {
+                ...state,
+                pw: action.payload
+            }    
+
+        case CHANGE_LOGGED:
+            return {
+                ...state,
+                logged: action.payload
+            }    
+        case CHANGE_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }        
 
         default:
             return state;

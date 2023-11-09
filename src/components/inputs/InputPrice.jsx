@@ -8,6 +8,7 @@ function InputPrice({Plceholder}) {
     const dispatch = useDispatch()
 
     function handleInputChange(e) {
+      
         if(e.target.value==""){
           dispatch(handlePriceChange("Php 0.00"))  
         }

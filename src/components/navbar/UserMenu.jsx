@@ -6,13 +6,26 @@ import MenuItem from './MenuItem';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { handleAuthChange, handleTitleChange } from '../../redux/auth';
+import UserMenu1 from './UserMenu1';
 
 
 function UserMenu() {
 
   const {isOpen} = useSelector(state => state)
   const dispatch = useDispatch()
-    const [isOpen1, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen] = useState(false);
+
+  const logged = JSON.parse(localStorage.getItem('logged')) || [];
+
+
+  function regHome(){
+    if(logged==""){
+      dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))
+    }
+    else{
+      dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Airbnb your home!"))
+    }
+  }  
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
@@ -22,7 +35,8 @@ function UserMenu() {
         <div className="relative">
         <div className="flex flex-row items-center gap-3">
           <div
-            onClick={() => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Airbnb your home!"))}}
+            // onClick={() => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Airbnb your home!"))}}
+            onClick={regHome}
             className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
           >
             Airbnb your home
@@ -41,11 +55,12 @@ function UserMenu() {
         </div>
   
         {isOpen1 && (
-          <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+          <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm" onClick={toggleOpen}>
             <div className="flex flex-col cursor-pointer">
               <>
-                <MenuItem onClick=  { () => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))}} label="Login" />
-                <MenuItem onClick={() => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Register"))}} label="Sign Up" />
+              <UserMenu1/>
+                {/* <MenuItem onClick=  { () => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))}} label="Login" />
+                <MenuItem onClick={() => {dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Register"))}} label="Sign Up" /> */}
               </>
             </div>
           </div>

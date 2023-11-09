@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button';
-import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleListChange, handlePriceChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
+import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleErrorChange, handleLoggedChange, handlePriceChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
 
 function AuthFooter({}) {
 
-    const {isOpen, title, regHome, category, img, price, list} = useSelector(state => state)
+    const {isOpen, title, regHome, category, img, price, email, name, pw} = useSelector(state => state)
     const dispatch = useDispatch()
-
+    const lest = JSON.parse(localStorage.getItem('products')) || [];
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+        
     function addList() {
       
       const newList = {
@@ -17,7 +19,9 @@ function AuthFooter({}) {
         img: img,
         listPrice: price
     }
-    dispatch(handleListChange([...list, newList]))
+
+    localStorage.setItem('products', JSON.stringify([...lest, newList]))
+    // dispatch(handleListChange([...list, newList]))
     dispatch(handleAuthChange(!isOpen))
     dispatch(handleTitleChange(""))
     dispatch(handleRegHomeChange("category"))
@@ -25,7 +29,29 @@ function AuthFooter({}) {
     dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
     dispatch(handlePriceChange("Php 0.00"))
     dispatch(handleFilterChange(""))
+    dispatch(handleErrorChange(""))
     }
+
+    const logEm = users.filter(item => item.email === email);  
+    const logPw = logEm.filter(item => item.pw === pw);  
+
+    function login1() {
+      // logPw.map(userpw => userpw.pw == pw ? 
+      //   (localStorage.setItem('logged', JSON.stringify(email)), dispatch(handleAuthChange(!isOpen)), dispatch(handleLoggedChange(email))) 
+      // : (dispatch(handleAuthChange(!isOpen)), dispatch(handleLoggedChange(email))))
+      
+      ( logPw != "" ? 
+        (localStorage.setItem('logged', JSON.stringify(email)), dispatch(handleAuthChange(!isOpen)), dispatch(handleLoggedChange(email)), dispatch(handleErrorChange(""))) 
+      : (dispatch(handleErrorChange("Invalid credential entered."))))
+  
+    }
+
+    const newUser = {
+      id: Math.random() * 100,
+      email: email,
+      name: name,
+      pw: pw,
+  }
 
     if(title=='Register'){
         return (
@@ -41,7 +67,8 @@ function AuthFooter({}) {
                 >
                   <Button 
                     label={"Continue"} 
-                    // onClick={}
+                    onClick={()=>  {localStorage.setItem('users', JSON.stringify([...users, newUser])), localStorage.setItem('logged', JSON.stringify(email)), dispatch(handleAuthChange(!isOpen)), dispatch(handleLoggedChange(email))}}
+                    
                   />
                 </div>
       <div className="flex flex-col gap-4 mt-3">
@@ -68,7 +95,7 @@ function AuthFooter({}) {
             >
               <p>Already have an account?
                 <span 
-                //   onClick={onToggle} 
+                onClick=  { () => {dispatch(handleTitleChange("Login"))}}
                   className="
                     text-neutral-800
                     cursor-pointer 
@@ -99,7 +126,9 @@ function AuthFooter({}) {
 
             <Button 
               label={"Continue"} 
-              // onClick={}
+              // onClick={()=>logPw === "" ? {login0}:{login1}}
+              onClick={login1}
+              // onClick={login0}
             />
           </div>
 
@@ -121,7 +150,7 @@ function AuthFooter({}) {
             text-neutral-500 text-center mt-4 font-light">
               <p>First time using Airbnb?
                 <span 
-                //   onClick={onToggle} 
+                onClick=  { () => {dispatch(handleTitleChange("Register"))}}
                   className="
                     text-neutral-800
                     cursor-pointer 

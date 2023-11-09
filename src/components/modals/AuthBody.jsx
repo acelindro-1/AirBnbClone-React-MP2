@@ -12,7 +12,7 @@ import Images from '../Images';
 
 function AuthBody({}) {
 
-    const {title, regHome} = useSelector(state => state)
+    const {title, regHome, error} = useSelector(state => state)
 
 
     if(title=="Register"){
@@ -49,7 +49,7 @@ Plceholder="Email"
        Plceholder="Password"
         id="password"
         label="Password"
-        type="password"
+        type="Password"
        
         // disabled={isLoading}
         // register={register}
@@ -72,7 +72,7 @@ Plceholder="Email"
           peer-focus:scale-75
           peer-focus:-translate-y-4
         `}
-      ></label>
+      > </label>
                 
 
             </div>
@@ -105,6 +105,8 @@ Plceholder="Email"
               // errors={errors}
               // required
             />
+            <h4 >{error}</h4>
+
           </div>
         )
   

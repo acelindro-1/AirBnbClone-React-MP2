@@ -1,12 +1,30 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { handleEmailChange, handleNameChange, handlePwChange } from '../../redux/auth'
 
-function Input({Plceholder}) {
+function Input({Plceholder, label}) {
+
+  const dispatch = useDispatch()
+
+  function handleInputChange(e) {
+if(label=="Email"){
+  dispatch(handleEmailChange(e.target.value))
+}
+else if(label=="Name"){
+  dispatch(handleNameChange(e.target.value))
+}
+else if(label=="Password"){
+  dispatch(handlePwChange(e.target.value))
+}
+
+}
   return (
     <input
     // id={id}
     // disabled={disabled}
     // {...register(id, { required })}
     placeholder = {Plceholder}
+    onChange={handleInputChange}
     // type={type}
     className={`
     peer

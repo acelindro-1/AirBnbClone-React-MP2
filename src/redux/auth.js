@@ -1,4 +1,4 @@
-import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT, CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER } from "./authStat";
+import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT, CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER, CHANGE_EMAIL, CHANGE_NAME, CHANGE_PW, CHANGE_LOGGED, CHANGE_ERROR } from "./authStat";
 
 export const handleAuthChange = (payload) => ({
     type: CHANGE_AUTH,
@@ -37,5 +37,27 @@ export const handleListChange = (payload) => ({
 
 export const handleFilterChange = (payload) => ({
     type: CHANGE_FILTER,
+    payload,
+})
+
+export const handleEmailChange = (payload) => ({
+    type: CHANGE_EMAIL,
+    payload,
+})
+export const handleNameChange = (payload) => ({
+    type: CHANGE_NAME,
+    payload,
+})
+export const handlePwChange = (payload) => ({
+    type: CHANGE_PW,
+    payload,
+})
+export const handleLoggedChange = (payload) => ({
+    type: CHANGE_LOGGED,
+    payload,
+})
+
+export const handleErrorChange = (payload) => ({
+    type: CHANGE_ERROR,
     payload,
 })
