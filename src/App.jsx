@@ -9,6 +9,17 @@ import { handleLoggedChange } from './redux/auth';
 
 function App() {
 
+  //clear products
+  // const lest = JSON.parse(localStorage.getItem('products')) || [];
+  // const delList = lest.filter((products) => products.id === "random")
+  // localStorage.setItem('products', JSON.stringify(delList))
+
+  //clear users
+  // const usrs = JSON.parse(localStorage.getItem('users')) || [];
+  // const usrsLst = usrs.filter((users) => users.id === "random")
+  // localStorage.setItem('users', JSON.stringify(usrsLst))
+  // localStorage.setItem('logged', JSON.stringify(""))
+
 
   const {isOpen} = useSelector(state => state)
 

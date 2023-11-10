@@ -5,7 +5,7 @@ import MenuItem from './MenuItem';
 
 
 import { useDispatch, useSelector } from 'react-redux'
-import { handleAuthChange, handleTitleChange } from '../../redux/auth';
+import { handleAuthChange, handleInfoChange, handleTitleChange } from '../../redux/auth';
 import UserMenu1 from './UserMenu1';
 
 
@@ -23,7 +23,7 @@ function UserMenu() {
       dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))
     }
     else{
-      dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Airbnb your home!"))
+      dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Airbnb your home!"), dispatch(handleInfoChange("")))
     }
   }  
 

@@ -1,5 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleAuthChange, handleCatChange, handleImgChange, handlePriceChange, handleTitleChange, handleInfoChange } from '../../redux/auth';
+
 
 function ListingCard({
     id,
@@ -7,15 +9,37 @@ function ListingCard({
     lLoc,
     lImg,
     lPrice,
+    lAcct
     
 }) {
-   
-  const {filter} = useSelector(state => state)
-  
+  const logged = JSON.parse(localStorage.getItem('logged')) || [];
+  const {isOpen} = useSelector(state => state)
+  const dispatch = useDispatch()
+
+  function click(){
+
+    if(logged==""){
+      dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))
+    }
+    else{
+
+      if(logged==lAcct){
+      dispatch(handleAuthChange(!isOpen)), 
+      dispatch(handleCatChange(lCat)),
+      dispatch(handleImgChange(lImg)),
+      dispatch(handlePriceChange(lPrice)),
+      dispatch(handleInfoChange(id)),
+      dispatch(handleTitleChange("Your listing"))
+      }
+      else{
+        dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Listing"))
+      }
+    }
+  }  
 
     return (
         <div 
-        //   onClick={() => router.push(`/listings/${data.id}`)} 
+          onClick={click} 
           className="col-span-1 cursor-pointer group"
         >
           <div className="flex flex-col gap-2 w-full">

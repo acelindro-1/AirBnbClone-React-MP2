@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleAuthChange, handleCatChange, handleImgChange, handlePriceChange, handleRegHomeChange, handleTitleChange, handleErrorChange } from '../../redux/auth';
+import { handleAuthChange, handleCatChange, handleImgChange, handlePriceChange, handleRegHomeChange, handleTitleChange, handleErrorChange, handleInfoChange } from '../../redux/auth';
 import AuthBody from './AuthBody';
 import AuthFooter from './AuthFooter';
 
@@ -142,6 +142,7 @@ function Modal ({
                     dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
                     dispatch(handlePriceChange("Php 0.00"))
                     dispatch(handleErrorChange(""))
+                    dispatch(handleInfoChange(""))
                   }}
                 >
                   <IoMdClose size={18} />

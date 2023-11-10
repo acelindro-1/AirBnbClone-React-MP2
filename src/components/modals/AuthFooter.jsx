@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button';
-import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleErrorChange, handleLoggedChange, handlePriceChange, handleRegHomeChange, handleTitleChange} from '../../redux/auth';
+import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleErrorChange, handleLoggedChange, handlePriceChange, handleRegHomeChange, handleTitleChange, handleInfoChange} from '../../redux/auth';
 
 function AuthFooter({}) {
 
-    const {isOpen, title, regHome, category, img, price, email, name, pw} = useSelector(state => state)
+    const {isOpen, title, regHome, category, img, price, email, name, pw, editInfo} = useSelector(state => state)
     const dispatch = useDispatch()
     const lest = JSON.parse(localStorage.getItem('products')) || [];
     const users = JSON.parse(localStorage.getItem('users')) || [];
+    const logged1 = JSON.parse(localStorage.getItem('logged')) || [];
         
     function addList() {
       
@@ -17,19 +18,44 @@ function AuthFooter({}) {
         cat: category,
         loc: "Philippines",
         img: img,
-        listPrice: price
+        listPrice: price,
+        account: logged1
     }
 
-    localStorage.setItem('products', JSON.stringify([...lest, newList]))
-    // dispatch(handleListChange([...list, newList]))
-    dispatch(handleAuthChange(!isOpen))
-    dispatch(handleTitleChange(""))
-    dispatch(handleRegHomeChange("category"))
-    dispatch(handleCatChange("Beach"))
-    dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
-    dispatch(handlePriceChange("Php 0.00"))
-    dispatch(handleFilterChange(""))
-    dispatch(handleErrorChange(""))
+    const update = lest.map((product) => product.id == editInfo ? {...product,
+      cat: category,
+      loc: "Philippines",
+      img: img,
+      listPrice: price,
+      account: logged1
+    }: product)
+
+    if(editInfo==""){
+      localStorage.setItem('products', JSON.stringify([...lest, newList]))
+      // dispatch(handleListChange([...list, newList]))
+      dispatch(handleAuthChange(!isOpen))
+      dispatch(handleTitleChange(""))
+      dispatch(handleRegHomeChange("category"))
+      dispatch(handleCatChange("Beach"))
+      dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+      dispatch(handlePriceChange("Php 0.00"))
+      dispatch(handleFilterChange(""))
+      dispatch(handleErrorChange(""))
+      dispatch(handleInfoChange(""))
+    }
+    else{
+      localStorage.setItem('products', JSON.stringify(update))
+      // dispatch(handleListChange([...list, newList]))
+      dispatch(handleAuthChange(!isOpen))
+      dispatch(handleTitleChange(""))
+      dispatch(handleRegHomeChange("category"))
+      dispatch(handleCatChange("Beach"))
+      dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+      dispatch(handlePriceChange("Php 0.00"))
+      dispatch(handleFilterChange(""))
+      dispatch(handleErrorChange(""))
+      dispatch(handleInfoChange(""))
+    }
     }
 
     const logEm = users.filter(item => item.email === email);  
@@ -67,7 +93,8 @@ function AuthFooter({}) {
                 >
                   <Button 
                     label={"Continue"} 
-                    onClick={()=>  {localStorage.setItem('users', JSON.stringify([...users, newUser])), localStorage.setItem('logged', JSON.stringify(email)), dispatch(handleAuthChange(!isOpen)), dispatch(handleLoggedChange(email))}}
+                    onClick={()=>  {
+                      localStorage.setItem('users', JSON.stringify([...users, newUser])), localStorage.setItem('logged', JSON.stringify(email)), dispatch(handleAuthChange(!isOpen))}}
                     
                   />
                 </div>
@@ -182,7 +209,16 @@ function AuthFooter({}) {
               <Button 
             // disabled={disabled} 
           
-            onClick={() => {dispatch(handleAuthChange(!isOpen))}}
+            onClick={() => {
+              dispatch(handleAuthChange(!isOpen))
+              dispatch(handleTitleChange(""))
+              dispatch(handleRegHomeChange("category"))
+              dispatch(handleCatChange("Beach"))
+              dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+              dispatch(handlePriceChange("Php 0.00"))
+              dispatch(handleErrorChange(""))
+              dispatch(handleInfoChange(""))
+            }}
             label="Close"
             outline
           />
@@ -336,7 +372,7 @@ function AuthFooter({}) {
     
           <Button 
             // disabled={disabled} 
-            label={"Create"} 
+            label={"Enter"} 
             onClick={() => {addList()}}
             
           />

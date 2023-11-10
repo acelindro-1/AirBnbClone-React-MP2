@@ -6,14 +6,33 @@ import CategoryInput from '../inputs/CategoryInput';
 import { categories } from '../navbar/Categories';
 import Map from '../Map';
 import Counter from '../inputs/Counter';
-import { handleListChange } from '../../redux/auth';
+import { handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleInfoChange, handleListChange, handlePriceChange, handleRegHomeChange, handleTitleChange } from '../../redux/auth';
 import InputPrice from '../inputs/InputPrice';
 import Images from '../Images';
+import Button from '../Button';
 
 function AuthBody({}) {
 
-    const {title, regHome, error} = useSelector(state => state)
+    const {isOpen, title, regHome, error, editInfo} = useSelector(state => state)
+    const dispatch = useDispatch()
 
+    const lest = JSON.parse(localStorage.getItem('products')) || [];
+
+    const delList = lest.filter((products) => products.id !== editInfo)
+
+    function del(){
+
+      localStorage.setItem('products', JSON.stringify(delList))
+      dispatch(handleAuthChange(!isOpen))
+      dispatch(handleTitleChange(""))
+      dispatch(handleRegHomeChange("category"))
+      dispatch(handleCatChange("Beach"))
+      dispatch(handleImgChange("../../src/assets/images/arctic.jpg"))
+      dispatch(handlePriceChange("Php 0.00"))
+      dispatch(handleFilterChange(""))
+      dispatch(handleErrorChange(""))
+      dispatch(handleInfoChange(""))
+    }
 
     if(title=="Register"){
         return (
@@ -258,6 +277,58 @@ Plceholder="Email"
       }
 
    
+    }
+    else if(title=="Your listing"){
+      return(
+        <div className="flex flex-col gap-4">
+        <Heading
+         Title="This is your listing"
+         subtitle="What do you want to do with this listing?"
+       />
+   
+        <Button 
+                 label={"Open"} 
+                 // onClick={()=>logPw === "" ? {login0}:{login1}}
+                //  onClick={login1}
+                 // onClick={login0}
+               />
+      <Button 
+                 label={"Edit"} 
+                 onClick={()=> {dispatch(handleTitleChange("Airbnb your home!"))}}
+               
+               />
+   
+   <Button 
+   
+                 label={"Delete"} 
+                 onClick={del}                 
+                //  onClick={login1}
+                 // onClick={login0}
+               />
+         </div>
+    
+      )
+    }
+    else if(title=="Listing"){
+      return(
+<div className="flex flex-col gap-4">
+
+<Button 
+         label={"Show availability"} 
+         // onClick={()=>logPw === "" ? {login0}:{login1}}
+        //  onClick={login1}
+         // onClick={login0}
+       />
+<Button 
+         label={"Book"} 
+         // onClick={()=>logPw === "" ? {login0}:{login1}}
+        //  onClick={login1}
+         // onClick={login0}
+       />
+
+ </div>
+      )
+
     }
 }
 

@@ -1,11 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { handlePriceChange } from '../../redux/auth'
 
 
 function InputPrice({Plceholder}) {
 
     const dispatch = useDispatch()
+    const {price} = useSelector(state => state)
 
     function handleInputChange(e) {
       
@@ -24,7 +25,7 @@ function InputPrice({Plceholder}) {
     // id={id}
     // disabled={disabled}
     // {...register(id, { required })}
-    placeholder = {Plceholder}
+    placeholder = {price}
     onChange={handleInputChange}
     // type={type}
     className={`
