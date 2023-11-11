@@ -12,12 +12,13 @@ function ListingCard({
     lAcct
     
 }) {
-  const logged = JSON.parse(localStorage.getItem('logged')) || [];
+
   const {isOpen} = useSelector(state => state)
   const dispatch = useDispatch()
 
   function click(){
-
+    
+    const logged = JSON.parse(localStorage.getItem('logged')) || [];
     if(logged==""){
       dispatch(handleAuthChange(!isOpen)), dispatch(handleTitleChange("Login"))
     }

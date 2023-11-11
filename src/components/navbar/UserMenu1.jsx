@@ -44,7 +44,7 @@ function UserMenu1({}) {
                 >
             {logged}
             </h3>
-            <MenuItem onClick=  { () => {  localStorage.setItem('logged', JSON.stringify(""))}} label="Logout" />
+            <MenuItem onClick = { () =>  localStorage.setItem('logged', JSON.stringify(""))} label="Logout" />
             </>
             
         )
