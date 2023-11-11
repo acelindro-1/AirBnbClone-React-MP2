@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { handleEmailChange, handleNameChange, handlePwChange } from '../../redux/auth'
 
-function Input({Plceholder, label}) {
+function Input({Plceholder, label, type}) {
 
   const dispatch = useDispatch()
 
@@ -25,7 +25,7 @@ else if(label=="Password"){
     // {...register(id, { required })}
     placeholder = {Plceholder}
     onChange={handleInputChange}
-    // type={type}
+    type={type}
     className={`
     peer
     w-full

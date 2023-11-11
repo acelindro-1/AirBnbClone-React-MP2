@@ -109,6 +109,7 @@ Plceholder="Email"
               id="email"
               label="Email"
               Plceholder="Email"
+              type="email"
               // disabled={isLoading}
               // register={register}  
               // errors={errors}
