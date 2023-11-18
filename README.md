@@ -11,3 +11,8 @@ npm install world-countries
 npm install react-select
 npm install -D @types/leaflet
 npm install react-leaflet
+
+https://www.youtube.com/watch?v=GeNUKYPEieA&t=431s  --------- maps.jsx, autocomplete places
+npm install --save react-places-autocomplete
+
+https://www.youtube.com/watch?v=VK9F8BWrOgY ------ get location by LatLng

@@ -1,22 +1,47 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button';
-import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleErrorChange, handleLoggedChange, handlePriceChange, handleRegHomeChange, handleTitleChange, handleInfoChange} from '../../redux/auth';
+import {handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleErrorChange, handleLoggedChange, handlePriceChange, handleRegHomeChange, handleTitleChange, handleInfoChange, handleLatChange, handleLngChange, handleAddChange, handleMapChange} from '../../redux/auth';
+import { getCurrentLocation } from '../../hooks/Geolocation';
 
 function AuthFooter({}) {
 
-    const {isOpen, title, regHome, category, img, price, email, name, pw, editInfo} = useSelector(state => state)
+    const {isOpen, title, regHome, category, img, price, email, name, pw, editInfo, add} = useSelector(state => state)
     const dispatch = useDispatch()
     const lest = JSON.parse(localStorage.getItem('products')) || [];
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const logged1 = JSON.parse(localStorage.getItem('logged')) || [];
+
+    function getLoc() {
+      getCurrentLocation()
+        .then((location) => {
+      
+          const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${location.latitude}&longitude=${location.longitude}&localityLanguage=en`
+          fetch(geoApiUrl)
+          .then(res => res.json())
+          .then(data => {
+              console.log(data)
+              // status.textContent = data.principalSubdivision
+              dispatch(handleAddChange(data.city+", "+data.locality+", "+data.countryCode))
+          })
+
+          dispatch(handleLatChange(location.latitude));
+          dispatch(handleLngChange(location.longitude));
+          dispatch(handleRegHomeChange('location'))
+          dispatch(handleMapChange('1'))
+      
+        })
+        .catch((error) => {
+          console.error('Error getting location:', error);
+        });
+    };
         
     function addList() {
       
       const newList = {
         id: Math.random() * 100,
         cat: category,
-        loc: "Philippines",
+        loc: add,
         img: img,
         listPrice: price,
         account: logged1
@@ -24,7 +49,7 @@ function AuthFooter({}) {
 
     const update = lest.map((product) => product.id == editInfo ? {...product,
       cat: category,
-      loc: "Philippines",
+      loc: add,
       img: img,
       listPrice: price,
       account: logged1
@@ -190,7 +215,6 @@ function AuthFooter({}) {
    
         </div>
 
-        
         )
     }
     else if (title=="Airbnb your home!") {
@@ -218,6 +242,9 @@ function AuthFooter({}) {
               dispatch(handlePriceChange("Php 0.00"))
               dispatch(handleErrorChange(""))
               dispatch(handleInfoChange(""))
+              dispatch(handleLatChange(""))
+              dispatch(handleLngChange(""))
+              dispatch(handleAddChange(""))
             }}
             label="Close"
             outline
@@ -226,7 +253,7 @@ function AuthFooter({}) {
           <Button 
             // disabled={disabled} 
           
-            onClick={() => {dispatch(handleRegHomeChange('location'))}}
+            onClick={getLoc}
             label="Next"
             
           />

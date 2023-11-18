@@ -172,7 +172,7 @@ Plceholder="Email"
           <div className="flex flex-col gap-8">
           <Heading
             Title="Where is your place located?"
-            subtitle="Help guests find you!"
+            // subtitle="Help guests find you!"
           />
           {/* <CountrySelect 
             value={location} 

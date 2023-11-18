@@ -1,4 +1,4 @@
-import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT,  CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER, CHANGE_EMAIL, CHANGE_NAME, CHANGE_PW, CHANGE_LOGGED, CHANGE_ERROR, CHANGE_INFO } from "./authStat";
+import { CHANGE_AUTH, CHANGE_TITLE, CHANGE_REG_HOME, CHANGE_CAT,  CHANGE_IMG, CHANGE_PRICE, CHANGE_LIST, CHANGE_FILTER, CHANGE_EMAIL, CHANGE_NAME, CHANGE_PW, CHANGE_LOGGED, CHANGE_ERROR, CHANGE_INFO, CH_LAT, CH_LANG , CH_ADD, CH_MAP } from "./authStat";
 const initialState = {
     isOpen: false,
     title: "",
@@ -13,7 +13,11 @@ const initialState = {
     pw:"",
     logged:"",
     error:"",
-    editInfo:""
+    editInfo:"",
+    lat: "",
+    lang: "",
+    add:"",
+    mapa:""
 }
 const reducer = (state = initialState, action) => {
     switch (action.type){
@@ -98,6 +102,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 editInfo: action.payload
             }        
+        case CH_LAT:
+            return {
+                ...state,
+                lat: action.payload
+            }        
+        case CH_LANG:
+            return {
+                ...state,
+                lang: action.payload
+            }          
+        case CH_ADD:
+            return {
+                ...state,
+                add: action.payload
+            }          
+        case CH_MAP:
+            return {
+                ...state,
+                mapa: action.payload
+            }                
         default:
             return state;
     }
