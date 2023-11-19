@@ -20,7 +20,7 @@ function AuthFooter({}) {
           fetch(geoApiUrl)
           .then(res => res.json())
           .then(data => {
-              console.log(data)
+              // console.log(data)
               // status.textContent = data.principalSubdivision
               dispatch(handleAddChange(data.city+", "+data.locality+", "+data.countryCode))
           })

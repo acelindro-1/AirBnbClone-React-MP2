@@ -6,7 +6,7 @@ import CategoryInput from '../inputs/CategoryInput';
 import { categories } from '../navbar/Categories';
 import Map from '../Map';
 import Counter from '../inputs/Counter';
-import { handleAuthChange, handleCatChange, handleFilterChange, handleImgChange, handleInfoChange, handleListChange, handlePriceChange, handleRegHomeChange, handleTitleChange } from '../../redux/auth';
+import { handleAuthChange, handleCatChange, handleErrorChange, handleFilterChange, handleImgChange, handleInfoChange, handleListChange, handlePriceChange, handleRegHomeChange, handleTitleChange } from '../../redux/auth';
 import InputPrice from '../inputs/InputPrice';
 import Images from '../Images';
 import Button from '../Button';
@@ -172,7 +172,7 @@ Plceholder="Email"
           <div className="flex flex-col gap-8">
           <Heading
             Title="Where is your place located?"
-            // subtitle="Help guests find you!"
+            subtitle="Help guests find you!"
           />
           {/* <CountrySelect 
             value={location} 

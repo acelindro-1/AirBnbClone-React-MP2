@@ -47,12 +47,6 @@ function Map() {
     
   }
 
-  function map1(e){
-   
-   console.log('yes');
-    
-  }
-
   // useEffect(() => {
   //   getCurrentLocation()
   //     .then((location) => {
@@ -88,6 +82,7 @@ function Map() {
           {...getInputProps({
             placeholder: 'Search Places ...',
             className: 'location-search-input',
+            
            
           })}
         />
@@ -99,8 +94,8 @@ function Map() {
               : 'suggestion-item';
             // inline style for demonstration purpose
             const style = suggestion.active
-              ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-              : { backgroundColor: '#ffffff', cursor: 'pointer' };
+              ? { backgroundColor: 'pink', cursor: 'pointer'}
+              : { backgroundColor: '#ffffff', cursor: 'pointer'};
             return (
               <div
                 {...getSuggestionItemProps(suggestion, {
@@ -122,9 +117,10 @@ function Map() {
 
 
 
-
- {/* <p>lat: {coordinates.lat}</p>
- <p>long: {coordinates.lng}</p> */}
+{/* 
+  <p>lat: {coordinates.lat}</p>
+  <p>long: {coordinates.lng}</p> */}
+  
  <p><b>{add}</b></p>
 
 </div>
